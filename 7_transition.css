@@ -1,0 +1,175 @@
+/* 7_transition.css */
+
+/* ---------- Page layout: left nav + main content ---------- */
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* Left nav column + main column */
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* ---------- Left nav column ---------- */
+nav#menuItems{
+  grid-column: 1;
+  background: #000;
+  padding: 0;
+  display: block;
+  position: relative; /* needed for dropdown positioning */
+}
+
+/* Nav buttons (blue blocks) */
+#menuItems button{
+  width: 100%;
+  display: block;
+  border: 1px solid #000;
+  padding: 14px 10px;
+
+  background: #0a27ff;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+#menuItems button:hover{
+  background: #2747ff;
+}
+
+/* ---------- Jump menu dropdown (gold list under Recent Articles) ---------- */
+#jumpMenu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  display: none;
+
+  background: #b98a12;
+  border-top: 2px solid #6d5207;
+  border-bottom: 2px solid #6d5207;
+}
+
+#jumpMenu li a{
+  display: block;
+  padding: 2px 12px;       /* tight list like screenshot */
+  text-decoration: none;
+
+  color: #0a27ff;
+  font-size: 18px;
+}
+
+/* Show dropdown when hovering Recent Articles OR the dropdown itself */
+#recentArticles:hover + #jumpMenu,
+#jumpMenu:hover{
+  display: block;
+}
+
+/* Hover a jump-menu item: blue background + gold text */
+#jumpMenu li a:hover{
+  background: #0a27ff;
+  color: #f2c84b;
+  text-decoration: none;
+}
+
+/* ---------- Main area ---------- */
+main{
+  grid-column: 2;
+  padding: 0 24px 30px 24px;
+}
+
+/* Red top header bar (matches screenshot) */
+main header{
+  background: #ff0000;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 -24px 18px -24px; /* stretch full width of main */
+  border-bottom: 2px solid #000;
+}
+
+main header p{
+  margin: 0;
+  font-size: 52px;
+  color: #000;
+}
+
+/* Big centered title */
+h1{
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 44px;
+  margin: 14px 0 22px 0;
+}
+
+/* ---------- Articles grid (4 across) ---------- */
+#container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+/* Articles: light -> dark + expand over 2 seconds */
+article{
+  color: #c2c2c2;            /* light gray default */
+  max-height: 260px;         /* collapsed */
+  overflow: hidden;
+
+  transition: color 2s ease, max-height 2s ease;
+}
+
+article h2{
+  margin: 0 0 10px 0;
+  color: #c2c2c2;            /* light heading default */
+  font-size: 22px;
+  font-weight: 600;
+  transition: color 2s ease, font-weight 2s ease;
+}
+
+/* Hovered article gets darker + expands */
+article:hover{
+  color: #111;
+  max-height: 1200px;
+}
+
+/* Hovered article title becomes bold + black */
+article:hover h2{
+  color: #000;
+  font-weight: 800;
+}
+
+/* First letter styling ONLY for first paragraph (not "Read more") */
+article p:first-of-type::first-letter{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 36px;
+  line-height: 1;
+}
+
+/* Read more arrow icon ONLY for Google links */
+a[href*="google.com"]::after{
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  vertical-align: middle;
+
+  background: url("arrowarrow.png") no-repeat center;
+  background-size: contain;
+}
+
+/* Make links blue like screenshot */
+a{
+  color: #0a27ff;
+}
+a:hover{
+  text-decoration: underline;
+}
